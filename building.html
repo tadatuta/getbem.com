@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BEM — Building</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="building.css">
+  </head>
+  <body class="page"><a href="https://github.com/getbem/getbem.com" title="Fork getbem.com on GitHub" class="fork"><img src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" class="fork__image"/></a>
+    <div role="navigation" class="navbar navbar_theme_default navbar_static-top">
+      <div class="grid">
+        <div class="navbar__header">
+          <button data-toggle="collapse" data-target="#menu" class="navbar__toggler">
+            <div class="sr-only">Toggle navigation</div><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button><a href="index.html" class="navbar__brand">Get BEM</a>
+        </div>
+        <div id="menu" class="navbar__collapse collapse">
+          <ul class="nav navbar__nav">
+            <li class="nav__item"><a href="introduction.html" class="nav__link">Introduction</a></li>
+            <li class="nav__item"><a href="naming.html" class="nav__link">Naming</a></li>
+            <li class="nav__item nav__item_active"><a href="building.html" class="nav__link">Building</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="grid__row">
+        <div class="grid__cell-xs_size_12 raw-text"><h1 id="file-system">File system</h1>
+<p>When you developing site, that contains more than one page — you will soon feel, that storing all CSS in <code>index.css</code> file is huge pain. When single file becomes more than <strong>1000</strong> lines of code you can&#39;t effectivly navigate in it, neither maintain it.</p>
+<p>Things getting worse, when you have a team, that making changes in single file. Often you will get merge conflicts (if you are using VCS). Some times styles, that belongs to each other will be in opposite ends of this file.</p>
+<p>And most painful part — is transfering common parts of this file into other (often new) project.</p>
+<p>We propose easy and intuitive way to structure your BEM CSS code on file system, that will solve these problems.</p>
+<p>If you are read <a href="naming.html">Naming</a> article, you already know, that any separate entity on the site will be a <strong>Block</strong> with <strong>Elements</strong> that can have <strong>Modifiers</strong>. Keeping that in mind we will split our <code>index.css</code> into multiple CSS files on file system. For each BEM entity we will create some files and place them to own folder:</p>
+
+        </div>
+      </div>
+      <div class="grid__row">
+        <div class="grid__cell-sm_size_4 grid__block-cell raw-text">
+          <div class="heading heading_level_2">Blocks</div>
+          <p>Each block will have it's own directory and file with styles:</p>
+          <div class="types">
+            <div class="types__d_b">block/</div>
+            <div class="types__f_b">  block.css</div>
+          </div>
+          <p>New blocks should have their own folders:</p>
+          <div class="types">
+            <div class="types__d_b">block/</div>
+            <div class="types__f_b">  block.css</div>
+            <div class="types__d_b">footer/</div>
+            <div class="types__f_b">  footer.css</div>
+          </div>
+        </div>
+        <div class="grid__cell-sm_size_4 grid__element-cell raw-text">
+          <div class="heading heading_level_2">Elements</div>
+          <p>Since elements can't be outside of blocks — we will place them in subfolder of block:</p>
+          <div class="types">
+            <div class="types__d_b">block/</div>
+            <div class="types__d_e">  __element/</div>
+            <div class="types__f_e">    block__element.css</div>
+            <div class="types__f_b">  block.css</div>
+          </div>
+          <p>or multiple elements:</p>
+          <div class="types">
+            <div class="types__d_b">block/</div>
+            <div class="types__d_e">  __one/</div>
+            <div class="types__f_e">    block__one.css</div>
+            <div class="types__d_e">  __two/</div>
+            <div class="types__f_e">    block__two.css</div>
+            <div class="types__f_b">block.css</div>
+          </div>
+        </div>
+        <div class="grid__cell-sm_size_4 grid__modifier-cell raw-text">
+          <div class="heading heading_level_2">Modifiers</div>
+          <p>Both blocks and elements can have modifiers. So they can be placed either into block folder:</p>
+          <div class="types">
+            <div class="types__d_b">block/</div>
+            <div class="types__d_m">  _mod/</div>
+            <div class="types__f_m">    block_mod_value.css</div>
+            <div class="types__f_b">block.css</div>
+          </div>
+          <p>or element subfolder:</p>
+          <div class="types">
+            <div class="types__d_b">block/</div>
+            <div class="types__d_e">  __element/</div>
+            <div class="types__d_m">    _mod/</div>
+            <div class="types__f_m">      block__element_mod.css</div>
+            <div class="types__f_e">    block__element.css</div>
+            <div class="types__f_b">  block.css</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid__row">
+        <div class="grid__cell-xs_size_12 raw-text"><p><br/>
+With this structuring you will get less merge conflicts and it is quite easy to copy some blocks from one project to another (just copy entire folder). There is another useful abstraction, that will help you to develope libraries of blocks. We call them <code>Levels</code> — folders that contains blocks. Quite intuitive thing to do, right?</p>
+<h2 id="levels">Levels</h2>
+
+        </div>
+      </div>
+      <div class="grid__row">
+        <div class="grid__cell-sm_size_8 raw-text"><p>When you have established styleguide, it is quite nice to have ready-to-go folder with blocks, that can be downloaded to new project and used as <strong>base</strong> styles for development. We recommend to create multiple levels in one project. For example we will have <code>base</code> folder with our style-guided blocks and <code>project</code> folder with blocks for our project. Blocks in levels can be extended with styles, that defined in other levels.</p>
+<p>Order of extending is defined by order of the levels (in build configuration for example). Since «C» in CSS is stands for cascading — concatination of CSS files in right order will provide extending of our styles.</p>
+
+        </div>
+        <div class="grid__cell-sm_size_4 raw-text">
+          <div class="types">base/
+            <div class="types__d_b">  header/</div>
+            <div class="types__f_b">    header.css</div>
+            <div class="types__d_b">  footer/</div>
+            <div class="types__f_b">    footer.css</div>project/
+            <div class="types__d_b">  header/</div>
+            <div class="types__f_b">    header.css</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid__row">
+        <div class="grid__cell-xs_size_12 raw-text"><h1 id="building">Building</h1>
+<p>After you get your CSS from single <code>index.css</code> file to hierarchy of separate CSS files you probably want to build them back together, otherwise your HTML will be bloated with <code>&lt;style&gt;</code> tags.</p>
+<p>We will demonstrate how to build CSS files with <a href="https://gulpjs.com">gulpjs</a>, but you free to choose your own build tool — because it is quite trivial to concatinate files even in <code>bash</code> script.</p>
+
+        </div>
+      </div>
+      <div class="grid__row">
+        <div class="grid__cell-sm_size_4 raw-text"><h4 id="1-install-modules">1. Install modules</h4>
+<pre><code class="lang-bash">npm install gulp -g
+npm install gulp gulp-concat
+</code></pre>
+
+        </div>
+        <div class="grid__cell-sm_size_4 raw-text"><h4 id="2-create-gulpfile-js-">2. Create <code>gulpfile.js</code></h4>
+<pre><code class="lang-js">var gulp = require(&#39;gulp&#39;);
+var concat = require(&#39;gulp-concat&#39;);
+var levels = [
+  &#39;base/**/*.css&#39;,
+  &#39;project/**/*.css&#39;
+];
+
+gulp.task(&#39;build&#39;, function () {
+    gulp.src(levels)
+        .pipe(concat(&#39;index.css&#39;))
+        .pipe(gulp.dest(&#39;dist&#39;));
+});
+</code></pre>
+
+        </div>
+        <div class="grid__cell-sm_size_4 raw-text"><h4 id="3-run-build-task">3. Run build task</h4>
+<pre><code class="lang-bash">gulp build
+</code></pre>
+
+        </div>
+      </div>
+      <div class="grid__row">
+        <div class="grid__cell-xs_size_12 raw-text"><br><p>Congradulations! You should get whole <code>index.css</code> file in <code>dist</code> directory.</p>
+<p>While building CSS is straight forward, JavaScript and Templates is a bit more complex subject. There are some tools, that can help you to build projects, that structured in layers and blocks (like <a href="https://github.com/floatdrop/gulp-bem">gulp-bem</a>).</p>
+<p>You can look at how this site is getting built. We are using Jade for templates and <a href="https://github.com/floatdrop/gulp-bem-pack">gulp-bem-pack</a> for JavaScript. Dive in site repository — <a href="https://github.com/getbem/getbem.com">https://github.com/getbem/getbem.com</a>.</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="edit"><a href="https://github.com/getbem/getbem.com/edit/master/pages/building/building.md" data-style="mega" data-icon="octicon-pencil" class="github-button">Edit this page</a></div>
+    </div>
+  </body>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-15345174-10', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script>
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '54070a998bfdf7145100b613');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script id="github-bjs" async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="index.js"></script>
+</html>
